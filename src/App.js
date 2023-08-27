@@ -10,6 +10,7 @@ import Signup from './components/Signup';
 import { useState } from 'react';
 import Profile from './components/Profile';
 import UserState from './context/user/UserState';
+import Welcome from './components/Welcome';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
             <Alert alert={alert} />
             <div className="container">
               <Routes>
-                <Route exact path="/" element={<Home showAlert={showAlert} />} />
+                <Route exact path="/" element={<Welcome />} />
+                <Route exact path="/home" element={<Home showAlert={showAlert} />} />
                 <Route exact path="/about" element={<About />} />
                 <Route exact path="/profile" element={< Profile />} />
                 <Route exact path="/login" element={<Login showAlert={showAlert} />} />
