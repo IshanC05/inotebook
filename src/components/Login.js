@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const Login = (props) => {
 
     let navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false);
+
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setLoading(true);
+
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, {
             method: "POST",
             headers: {
@@ -23,6 +29,7 @@ const Login = (props) => {
         if (json.success) {
             // save the auth token
             localStorage.setItem('token', json.authToken);
+            setLoading(false);
             navigate('/');
             props.showAlert("Logged in successfully", "success")
         } else {
@@ -47,7 +54,8 @@ const Login = (props) => {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={onChange} />
                 </div>
-                <button type="submit" className="btn btn-primary" >Submit</button>
+                {!loading && <button type="submit" className="btn btn-primary">Submit</button>}
+                {loading && <Spinner />}
             </form>
         </div>
     )
