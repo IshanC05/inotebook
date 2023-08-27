@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 function UserState(props) {
 
-    const host = "http://localhost:5000"
+    const host = `${process.env.REACT_APP_BASE_URL}`
 
     const userDataInitial = {};
 
