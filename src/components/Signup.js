@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const Signup = (props) => {
 
 
     let navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
 
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
 
@@ -17,6 +20,8 @@ const Signup = (props) => {
             props.showAlert("Passwords do not match", "danger");
             return;
         }
+
+        setLoading(true);
 
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/createUser`, {
             method: "POST",
@@ -31,6 +36,7 @@ const Signup = (props) => {
         if (json.success) {
             // save the auth token
             localStorage.setItem('token', json.authToken);
+            setLoading(false);
             navigate('/');
             props.showAlert("Account creation successful", "success")
 
@@ -64,7 +70,8 @@ const Signup = (props) => {
                     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
                     <input type="password" className="form-control" id="cpassword" name="cpassword" onChange={onChange} required />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                {!loading && <button type="submit" className="btn btn-primary">Submit</button>}
+                {loading && <Spinner />}
             </form>
         </div>
     )
