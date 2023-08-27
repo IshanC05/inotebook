@@ -12,18 +12,19 @@ const Signup = (props) => {
         e.preventDefault();
 
         const { name, email, password } = credentials;
-        const response = await fetch('http://localhost:5000/api/auth/createUser', {
+
+        if (password !== credentials.cpassword) {
+            props.showAlert("Passwords do not match", "danger");
+            return;
+        }
+
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/createUser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ name, email, password }),
         });
-
-        if (password !== credentials.cpassword) {
-            props.showAlert("Passwords do not match", "danger");
-            return;
-        }
 
         const json = await response.json();
         console.log(json);
