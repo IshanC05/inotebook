@@ -17,7 +17,7 @@ const Notes = (props) => {
         if (localStorage.getItem('token')) {
             getNotes();
         } else {
-            navigate('/login');
+            navigate('/');
         }
         // eslint-disable-next-line
     }, [])
@@ -76,7 +76,7 @@ const Notes = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="row my-3">
+            <div className="container row my-3">
                 <h2>Your Notes</h2>
                 <div className='container mx-2'>
                     {notes.length === 0 && 'No notes to display'}

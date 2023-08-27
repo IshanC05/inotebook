@@ -13,7 +13,7 @@ const Profile = () => {
         if (localStorage.getItem('token')) {
             getUserData();
         } else {
-            navigate('/login');
+            navigate('/');
         }
         // eslint-disable-next-line
     }, [])
