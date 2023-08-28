@@ -53,9 +53,10 @@ const NoteState = (props) => {
             }
         })
 
+        // eslint-disable-next-line
         const json = await response.json();
 
-        console.log(json);
+        // console.log(json);
 
         const newNotes = notes.filter(
             (note) => { return note._id !== id }
@@ -74,9 +75,10 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag }),
         });
 
+        // eslint-disable-next-line
         const json = await response.json();
 
-        console.log(json);
+        // console.log(json);
 
         let newNotes = JSON.parse(JSON.stringify(notes));
         // Logic to edit in client
