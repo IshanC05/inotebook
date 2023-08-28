@@ -29,13 +29,12 @@ const Login = (props) => {
         if (json.success) {
             // save the auth token
             localStorage.setItem('token', json.authToken);
-            setLoading(false);
             navigate('/home');
             props.showAlert("Logged in successfully", "success")
         } else {
             props.showAlert("Invalid Credentials", "danger")
         }
-
+        setLoading(false);
     }
 
     const onChange = (event) => {

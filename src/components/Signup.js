@@ -36,14 +36,13 @@ const Signup = (props) => {
         if (json.success) {
             // save the auth token
             localStorage.setItem('token', json.authToken);
-            setLoading(false);
             navigate('/home');
             props.showAlert("Account creation successful", "success")
 
         } else {
             props.showAlert(json.error ? json.error : json.errors[0].msg, "danger")
         }
-
+        setLoading(false);
     }
 
     const onChange = (event) => {
