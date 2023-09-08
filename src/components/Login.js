@@ -51,7 +51,7 @@ const Login = (props) => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={onChange} />
+                    <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={onChange} autocomplete="off" />
                 </div>
                 {!loading && <button type="submit" className="btn btn-primary">Submit</button>}
                 {loading && <Spinner />}
