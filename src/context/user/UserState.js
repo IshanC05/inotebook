@@ -22,8 +22,26 @@ function UserState(props) {
         setUserData(json)
     }
 
+    const updateUserName = async (id, name) => {
+        const response = await fetch(`${host}/api/auth/updatename/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem('token')
+            },
+            body: JSON.stringify({ name })
+        });
+
+        // eslint-disable-next-line
+        const json = await response.json();
+
+        // console.log(json)
+
+        setUserData(json.user)
+    }
+
     return (
-        <UserContext.Provider value={{ userData, getUserData }}>
+        <UserContext.Provider value={{ userData, getUserData, updateUserName }}>
             {props.children}
         </UserContext.Provider>
     )
